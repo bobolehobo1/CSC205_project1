@@ -1,18 +1,15 @@
 import java.util.*;
+
+/**
+ * class defining the primary behaviour of program. prompts the user to enter what criteria fits their housing needs, instantiates objects accordingly, and prints the correct outpu
+ */
 public class HouseListTester {
 
     public static void main(String[] args) {
         
-        /*
-        Specification 2: Your program needs to prompt the user to enter the criteria they want to use to search for houses that they are interested in. In particular,
-        the program should prompt the user to enter the following data:
-        a. minimum price
-        b. maximum price
-        c. minimum area (i.e., square footage)
-        d. maximum area (i.e., square footage)
-        e. minimum number of bedrooms
-        f. maximum number of bedrooms
-        */
+        /**
+         * user prompting
+         */
         Scanner sysin = new Scanner(System.in);
         System.out.println("Enter the minimum price you want to pay for a house:");
         int minPrice = sysin.nextInt();
@@ -28,7 +25,7 @@ public class HouseListTester {
         int maxBedrooms = sysin.nextInt();
         System.out.println("");
 
-        /* hard code values 
+        /* houses.txt values 
         minPrice maxPrice minArea maxArea minBed maxBed
         1000     500000   100     5000    0      10	
         1000     100000   500     1200    0      3
@@ -39,7 +36,7 @@ public class HouseListTester {
         100000   200000   2500    5000    4      6
         */
 
-      
+        //object creation 
         HouseList hl = new HouseList("houses.txt");
         Criteria c = new Criteria(minPrice, maxPrice, minArea, maxArea, minBedrooms, maxBedrooms);
         hl.printHouses(c);
