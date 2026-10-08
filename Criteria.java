@@ -1,49 +1,61 @@
 /**
- * defines the fields of criteria as described by the user to be passed onto other methods in this package
+ * Holds the search limits a buyer enters (price, area, and bedroom ranges)
+ * so other classes can check houses against them.
+ *
+ * @author theBobo
+ * @version October 7, 2026
  */
 public class Criteria {
-    int minPrice;
-    int maxPrice;
-    int minArea;
-    int maxArea;
-    int minBedrooms;
-    int maxBedrooms;
-
+    //------------------------------------------------------------------------
+    //Lowest price the buyer will pay
+    private int minimumPrice;
+    //Highest price the buyer will pay
+    private int maximumPrice;
+    //Smallest square footage the buyer will accept
+    private int minimumArea;
+    //Largest square footage the buyer will accept
+    private int maximumArea;
+    //Fewest bedrooms the buyer will accept
+    private int minimumNumberOfBedrooms;
+    //Most bedrooms the buyer will accept
+    private int maximumNumberOfBedrooms;
+ 
+    //------------------------------------------------------------------------
     /**
-     * constructor for the criteria field to be used in other classes
-     * @param minimumPrice sets the minimum price of the house the user is searching for
-     * @param maximumPrice sets the minimum price of the house the user is searching for
-     * @param minimumArea sets the minimum area of the house the user is searching for
-     * @param maximumArea sets the minimum area of the house the user is searching for
-     * @param minimumNumberOfBedrooms sets the minimum number of bedrooms in the house the user is searching for
-     * @param minimumNumberOfBedrooms sets the minimum number of bedrooms in the house the user is searching for
+     * Constructor that stores the buyer's limits.
+     * @param minimumPrice the lowest price the buyer will pay
+     * @param maximumPrice the highest price the buyer will pay
+     * @param minimumArea the smallest square footage the buyer will accept
+     * @param maximumArea the largest square footage the buyer will accept
+     * @param minimumNumberOfBedrooms the fewest bedrooms the buyer will accept
+     * @param maximumNumberOfBedrooms the most bedrooms the buyer will accept
      */
-    Criteria(int minimumPrice, int maximumPrice, int minimumArea, int maximumArea, int minimumNumberOfBedrooms, int maximumNumberOfBedrooms) {
-    minPrice = minimumPrice; maxPrice = maximumPrice; minArea = minimumArea; maxArea = maximumArea; minBedrooms = minimumNumberOfBedrooms; maxBedrooms = maximumNumberOfBedrooms;
+    public Criteria(int minimumPrice, int maximumPrice, int minimumArea, int maximumArea, int minimumNumberOfBedrooms, int maximumNumberOfBedrooms) {
+        this.minimumPrice = minimumPrice;
+        this.maximumPrice = maximumPrice;
+        this.minimumArea = minimumArea;
+        this.maximumArea = maximumArea;
+        this.minimumNumberOfBedrooms = minimumNumberOfBedrooms;
+        this.maximumNumberOfBedrooms = maximumNumberOfBedrooms;
     }
-    /**
-     * returns the minimum price the user is willing to pay 
-     */
-    public int getMinPrice() {return minPrice;}
-    /**
-     * returns the maximum price the user is willing to pay
-     */
-    public int getMaxPrice() {return maxPrice;}
-    /**
-     * returns the minimum area the user is willing to accept
-     */
-    public int getMinArea() {return minArea;}
-    /**
-     * returns the maximum area the user is willing to accept
-     */
-    public int getMaxArea() {return maxArea;}
-    /**
-     * returns the minimum number of bedrooms the user is willing to accept
-     */
-    public int getMinBedrooms() {return minBedrooms;}
-    /**
-     * returns the maximum number of bedrooms the user is willing to accept
-     */
-    public int getMaxBedrooms() {return maxBedrooms;}
-    
+ 
+    //------------------------------------------------------------------------
+    /** @return the minimum price the user is willing to pay */
+    public int getMinPrice() {return minimumPrice;}
+ 
+    /** @return the maximum price the user is willing to pay */
+    public int getMaxPrice() {return maximumPrice;}
+ 
+    /** @return the minimum area the user is willing to accept */
+    public int getMinArea() {return minimumArea;}
+ 
+    /** @return the maximum area the user is willing to accept */
+    public int getMaxArea() {return maximumArea;}
+ 
+    /** @return the minimum number of bedrooms the user is willing to accept */
+    public int getMinBedrooms() {return minimumNumberOfBedrooms;}
+ 
+    /** @return the maximum number of bedrooms the user is willing to accept */
+    public int getMaxBedrooms() {return maximumNumberOfBedrooms;}
+    //------------------------------------------------------------------------
 }

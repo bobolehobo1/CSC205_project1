@@ -1,20 +1,27 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+ 
 /**
- * class that creates objects from a file being passed in. 
+ * Holds an ArrayList of House objects read from a file and searches them
+ * against a Criteria object.
+ *
+ * @author theBobo
+ * @version October 7, 2026
  */
 public class HouseList {
+    //------------------------------------------------------------------------
+    //All of the houses currently for sale
     private ArrayList<House> houseList = new ArrayList<>();
-
+ 
+    //------------------------------------------------------------------------
     /**
-     * method that takes in data about a set of houses from a file and instantiates house objects from that data
-     * @param fileName the file containing house data
+     * Constructor that reads house data from a file and creates a House object for each entry.
+     * @param fileName the name of the file containing the house data
      */
     public HouseList(String fileName) {
-        try (Scanner fileInput = new Scanner(new File(fileName))) {  
-            while (fileInput.hasNext()) 
+        try (Scanner fileInput = new Scanner(new File(fileName))) {
+            while (fileInput.hasNext())
             {
                 String address = fileInput.next();
                 int price = fileInput.nextInt();
@@ -23,13 +30,14 @@ public class HouseList {
                 House h = new House(address, price, area, numBedrooms);
                 houseList.add(h);
             }
-            fileInput.close();
         }   catch (FileNotFoundException ex) {System.out.println("file not found");}
     }
-
+ 
+    //------------------------------------------------------------------------
     /**
-     * checks the houses objects created to see if they satisfy the criteria passed in from the user
-     * @param Criteria-object the object with the fields that contain what house the user is searching for 
+     * Builds a string of every house that satisfies the criteria, with a separator after each.
+     * @param c the Criteria object holding the limits the user is searching with
+     * @return a concatenated string of the details of all houses that satisfy c
      */
     public String getHouses(Criteria c) {
         String viableH = "";
@@ -38,10 +46,12 @@ public class HouseList {
         }
         return viableH;
     }
-
+ 
+    //------------------------------------------------------------------------
     /**
-     * displays the houses that meet the users criteria to the terminal
+     * Prints every house that satisfies the criteria to the terminal.
+     * @param c the Criteria object holding the limits the user is searching with
      */
     public void printHouses(Criteria c) {System.out.println(getHouses(c));}
-    
+    //------------------------------------------------------------------------
 }

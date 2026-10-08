@@ -1,33 +1,31 @@
 import java.util.*;
-
+ 
 /**
- * class defining the primary behaviour of program. prompts the user to enter what criteria fits their housing needs, instantiates objects accordingly, and prints the correct outpu
+ * Interacts with the user: repeatedly prompts for search criteria, creates the
+ * matching Criteria objects, and prints the houses that satisfy each one until
+ * the user chooses to stop.
+ *
+ * @author theBobo
+ * @version October 7, 2026
  */
 public class HouseListTester {
-
+    //------------------------------------------------------------------------
+    //The houses currently for sale, read from houses.txt
+    private static HouseList availableHouses;
+ 
+    //------------------------------------------------------------------------
+    /**
+     * Main program: reads the houses once, then keeps reading criteria from the
+     * user and printing the matching houses until the user answers anything but "y".
+     * @param args command line arguments (not used)
+     */
     public static void main(String[] args) {
-        
-        /**
-         * user prompting
-         */
         Scanner sysin = new Scanner(System.in);
-        System.out.println("Enter the minimum price you want to pay for a house:");
-        int minPrice = sysin.nextInt();
-        System.out.println("Enter the maximum price you want to pay for a house:");
-        int maxPrice = sysin.nextInt();
-        System.out.println("Enter the minimum square footage you need:");
-        int minArea = sysin.nextInt();
-        System.out.println("Enter the maximum square footage you want:");
-        int maxArea = sysin.nextInt();
-        System.out.println("Enter the minimum number of bedrooms:");
-        int minBedrooms = sysin.nextInt();
-        System.out.println("Enter the maximum number of bedrooms:");
-        int maxBedrooms = sysin.nextInt();
-        System.out.println("");
-
-        /* houses.txt values 
+        availableHouses = new HouseList("houses.txt");
+ 
+        /* test criteria
         minPrice maxPrice minArea maxArea minBed maxBed
-        1000     500000   100     5000    0      10	
+        1000     500000   100     5000    0      10
         1000     100000   500     1200    0      3
         100000   200000   1000    2000    2      3
         200000   300000   1500    4000    3      6
@@ -35,11 +33,47 @@ public class HouseListTester {
         150000   300000   1500    4000    3      6
         100000   200000   2500    5000    4      6
         */
+ 
+        int search = 0;
+        String again;
+        do {
+            //------------------------------------------------------------------------
+            //user prompting
+            System.out.println("Search " + ++search);
+            System.out.println("Enter the minimum price, minimum area, and minimum number of bedrooms separated by commas:");
+            String[] minCriteria = sysin.nextLine().split("\\s*,\\s*");
+            System.out.println("Enter the maximum price, maximum area, and maximum number of bedrooms separated by commas:");
+            String[] maxCriteria = sysin.nextLine().split("\\s*,\\s*");
+ 
+            if (minCriteria.length < 3 || maxCriteria.length < 3) {
+                System.out.println("Each line needs three values. Skipping this search.\n");
+            } else {
+                int minPrice = Integer.parseInt(minCriteria[0].trim());
+                int minArea = Integer.parseInt(minCriteria[1].trim());
+                int minBedrooms = Integer.parseInt(minCriteria[2].trim());
+                int maxPrice = Integer.parseInt(maxCriteria[0].trim());
+                int maxArea = Integer.parseInt(maxCriteria[1].trim());
+                int maxBedrooms = Integer.parseInt(maxCriteria[2].trim());
+                System.out.println("");
+ 
+                //------------------------------------------------------------------------
+                //object creation and output
+                Criteria c = new Criteria(minPrice, maxPrice, minArea, maxArea, minBedrooms, maxBedrooms);
 
-        //object creation 
-        HouseList hl = new HouseList("houses.txt");
-        Criteria c = new Criteria(minPrice, maxPrice, minArea, maxArea, minBedrooms, maxBedrooms);
-        hl.printHouses(c);
-        
+
+                
+                availableHouses.printHouses(c);
+                System.out.println("==============================\n");
+            }
+ 
+            //------------------------------------------------------------------------
+            //ask whether to continue
+            System.out.println("Search again? (y/n):");
+            again = sysin.nextLine().trim();
+            System.out.println("");
+        } while (again.equalsIgnoreCase("y"));
+ 
+        sysin.close();
     }
 }
+ 
